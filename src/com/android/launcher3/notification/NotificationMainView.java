@@ -16,8 +16,12 @@
 
 package com.android.launcher3.notification;
 
+<<<<<<< HEAD
 import static com.android.launcher3.Utilities.mapToRange;
 import static com.android.launcher3.anim.Interpolators.LINEAR;
+=======
+import static com.android.launcher3.anim.Interpolators.scrollInterpolatorForVelocity;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_NOTIFICATION_DISMISSED;
 
 import android.animation.AnimatorSet;
@@ -41,7 +45,13 @@ import androidx.annotation.Nullable;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.model.data.ItemInfo;
+<<<<<<< HEAD
 import com.android.launcher3.popup.PopupDataProvider;
+=======
+import com.android.launcher3.touch.BaseSwipeDetector;
+import com.android.launcher3.touch.OverScroll;
+import com.android.launcher3.touch.SingleAxisSwipeDetector;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.views.ActivityContext;
 
@@ -321,10 +331,50 @@ public class NotificationMainView extends LinearLayout {
     }
 
     public void onChildDismissed() {
+<<<<<<< HEAD
         ActivityContext activityContext = ActivityContext.lookupContext(getContext());
         PopupDataProvider popupDataProvider = activityContext.getPopupDataProvider();
         if (popupDataProvider == null) {
             return;
+=======
+        Launcher launcher = Launcher.getLauncher(getContext());
+        launcher.getPopupDataProvider().cancelNotification(
+                mNotificationInfo.notificationKey);
+        launcher.getStatsLogManager().logger().log(LAUNCHER_NOTIFICATION_DISMISSED);
+    }
+
+    // SingleAxisSwipeDetector.Listener's
+    @Override
+    public void onDragStart(boolean start, float startDisplacement) { }
+
+
+    @Override
+    public boolean onDrag(float displacement) {
+        setContentTranslation(canChildBeDismissed()
+                ? displacement : OverScroll.dampedScroll(displacement, getWidth()));
+        mContentTranslateAnimator.cancel();
+        return true;
+    }
+
+    @Override
+    public void onDragEnd(float velocity) {
+        final boolean willExit;
+        final float endTranslation;
+        final float startTranslation = mTextAndBackground.getTranslationX();
+
+        if (!canChildBeDismissed()) {
+            willExit = false;
+            endTranslation = 0;
+        } else if (mSwipeDetector.isFling(velocity)) {
+            willExit = true;
+            endTranslation = velocity < 0 ? - getWidth() : getWidth();
+        } else if (Math.abs(startTranslation) > getWidth() / 2) {
+            willExit = true;
+            endTranslation = (startTranslation < 0 ? -getWidth() : getWidth());
+        } else {
+            willExit = false;
+            endTranslation = 0;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
         popupDataProvider.cancelNotification(mNotificationInfo.notificationKey);
         activityContext.getStatsLogManager().logger().log(LAUNCHER_NOTIFICATION_DISMISSED);

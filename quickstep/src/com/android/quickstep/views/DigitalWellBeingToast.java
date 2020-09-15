@@ -51,9 +51,12 @@ import com.android.launcher3.BaseActivity;
 import com.android.launcher3.BaseDraggingActivity;
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.R;
+<<<<<<< HEAD
 import com.android.launcher3.Utilities;
 import com.android.launcher3.touch.PagedOrientationHandler;
 import com.android.launcher3.util.SplitConfigurationOptions.SplitBounds;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.systemui.shared.recents.model.Task;
 
 import java.lang.annotation.Retention;

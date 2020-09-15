@@ -33,8 +33,11 @@ import androidx.annotation.IntDef;
 import com.android.launcher3.DeviceProfile.DeviceProfileListenable;
 import com.android.launcher3.DeviceProfile.OnDeviceProfileChangeListener;
 import com.android.launcher3.logging.StatsLogManager;
+<<<<<<< HEAD
 import com.android.launcher3.testing.TestLogging;
 import com.android.launcher3.testing.shared.TestProtocol;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.SystemUiController;
 import com.android.launcher3.util.ViewCache;
 import com.android.launcher3.views.AppLauncher;
@@ -81,6 +84,10 @@ public abstract class BaseActivity extends Activity implements AppLauncher,
             new ArrayList<>();
 
     protected DeviceProfile mDeviceProfile;
+<<<<<<< HEAD
+=======
+    protected StatsLogManager mStatsLogManager;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     protected SystemUiController mSystemUiController;
     private StatsLogManager mStatsLogManager;
 
@@ -143,6 +150,7 @@ public abstract class BaseActivity extends Activity implements AppLauncher,
         return mDeviceProfile;
     }
 
+<<<<<<< HEAD
     @Override
     public List<OnDeviceProfileChangeListener> getOnDeviceProfileChangeListeners() {
         return mDPChangeListeners;
@@ -153,6 +161,9 @@ public abstract class BaseActivity extends Activity implements AppLauncher,
      */
     @Override
     public StatsLogManager getStatsLogManager() {
+=======
+    public final StatsLogManager getStatsLogManager() {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         if (mStatsLogManager == null) {
             mStatsLogManager = StatsLogManager.newInstance(this);
         }

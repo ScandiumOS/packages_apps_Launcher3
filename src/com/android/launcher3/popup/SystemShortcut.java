@@ -205,6 +205,7 @@ public abstract class SystemShortcut<T extends Context & ActivityContext> extend
         public void onClick(View view) {
             InfoBottomSheet cbs;
             dismissTaskMenuView(mTarget);
+<<<<<<< HEAD
             Rect sourceBounds = Utilities.getViewBounds(view);
             try {
                 cbs = (InfoBottomSheet) mTarget.getLayoutInflater().inflate(
@@ -218,6 +219,11 @@ public abstract class SystemShortcut<T extends Context & ActivityContext> extend
                         mItemInfo, sourceBounds, ActivityOptions.makeBasic().toBundle());
             }
 
+=======
+            Rect sourceBounds = mTarget.getViewBounds(view);
+            new PackageManagerHelper(mTarget).startDetailsActivityForInfo(
+                    mItemInfo, sourceBounds, ActivityOptions.makeBasic().toBundle());
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             mTarget.getStatsLogManager().logger().withItemInfo(mItemInfo)
                     .log(LAUNCHER_SYSTEM_SHORTCUT_APP_INFO_TAP);
         }

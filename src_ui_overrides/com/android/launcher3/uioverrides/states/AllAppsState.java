@@ -26,8 +26,11 @@ import com.android.launcher3.DeviceProfile.DeviceProfileListenable;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherState;
 import com.android.launcher3.R;
+<<<<<<< HEAD
 import com.android.launcher3.Utilities;
 import com.android.launcher3.util.Themes;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 /**
  * Definition for AllApps state

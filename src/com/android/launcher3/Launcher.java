@@ -41,6 +41,7 @@ import static com.android.launcher3.LauncherState.NO_OFFSET;
 import static com.android.launcher3.LauncherState.NO_SCALE;
 import static com.android.launcher3.LauncherState.SPRING_LOADED;
 import static com.android.launcher3.Utilities.postAsyncCallback;
+<<<<<<< HEAD
 import static com.android.launcher3.accessibility.LauncherAccessibilityDelegate.getSupportedActions;
 import static com.android.launcher3.anim.Interpolators.EMPHASIZED;
 import static com.android.launcher3.logging.StatsLogManager.EventEnum;
@@ -52,6 +53,13 @@ import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCH
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ONRESUME;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ONSTOP;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_WIDGET_RECONFIGURED;
+=======
+import static com.android.launcher3.dragndrop.DragLayer.ALPHA_INDEX_LAUNCHER_LOAD;
+import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_BACKGROUND;
+import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_HOME;
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ONRESUME;
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ONSTOP;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import static com.android.launcher3.model.ItemInstallQueue.FLAG_ACTIVITY_PAUSED;
 import static com.android.launcher3.model.ItemInstallQueue.FLAG_DRAG_AND_DROP;
 import static com.android.launcher3.popup.SystemShortcut.APP_INFO;
@@ -626,6 +634,21 @@ public class Launcher extends StatefulActivity<LauncherState>
             return;
         }
 
+<<<<<<< HEAD
+=======
+        mOldConfig.setTo(newConfig);
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onIdpChanged(int changeFlags, InvariantDeviceProfile idp) {
+        onIdpChanged(idp);
+    }
+
+    private void onIdpChanged(InvariantDeviceProfile idp) {
+
+        initDeviceProfile(idp);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         dispatchDeviceProfileChanged();
         reapplyUi();
         mDragLayer.recreateControllers();
@@ -989,10 +1012,17 @@ public class Launcher extends StatefulActivity<LauncherState>
         } else {
             mOverlayManager.onActivityStopped(this);
         }
+<<<<<<< HEAD
         hideKeyboard();
         logStopAndResume(false /* isResume */);
         mAppWidgetHost.setActivityStarted(false);
         NotificationListener.removeNotificationsChangedListener(getPopupDataProvider());
+=======
+
+        logStopAndResume(false /* isResume */);
+        mAppWidgetHost.setListenIfResumed(false);
+        NotificationListener.removeNotificationsChangedListener();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     @Override
@@ -1027,6 +1057,11 @@ public class Launcher extends StatefulActivity<LauncherState>
         mAppWidgetHost.setActivityResumed(true);
     }
 
+<<<<<<< HEAD
+=======
+    protected void handlePendingActivityRequest() { }
+
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     private void logStopAndResume(boolean isResume) {
         if (mPendingExecutor != null) return;
         int pageIndex = mWorkspace.isOverlayShown() ? -1 : mWorkspace.getCurrentPage();
@@ -1623,6 +1658,12 @@ public class Launcher extends StatefulActivity<LauncherState>
                 }
             }
 
+<<<<<<< HEAD
+=======
+            // Handle HOME_INTENT
+            hideKeyboard();
+
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             if (mLauncherCallbacks != null) {
                 mLauncherCallbacks.onHomeIntent(internalStateHandled);
             }

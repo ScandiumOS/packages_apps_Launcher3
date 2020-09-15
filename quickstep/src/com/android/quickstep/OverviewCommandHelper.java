@@ -30,8 +30,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 
 import com.android.launcher3.statemanager.StatefulActivity;
+<<<<<<< HEAD
 import com.android.launcher3.util.RunnableList;
 import com.android.quickstep.RecentsAnimationCallbacks.RecentsAnimationListener;
+=======
+import com.android.quickstep.util.ActivityInitListener;
+import com.android.quickstep.util.RemoteAnimationProvider;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.views.RecentsView;
 import com.android.quickstep.views.TaskView;
 import com.android.systemui.shared.recents.model.ThumbnailData;
@@ -321,8 +326,26 @@ public class OverviewCommandHelper {
         public final int type;
         RecentsAnimationCallbacks mActiveCallbacks;
 
+<<<<<<< HEAD
         CommandInfo(int type) {
             this.type = type;
+=======
+        protected final BaseActivityInterface<?, T> mActivityInterface;
+        private final long mCreateTime;
+        private final AppToOverviewAnimationProvider<T> mAnimationProvider;
+
+        private final long mToggleClickedTime = SystemClock.uptimeMillis();
+        private ActivityInitListener mListener;
+
+        public RecentsActivityCommand() {
+            mActivityInterface = mOverviewComponentObserver.getActivityInterface();
+            mCreateTime = SystemClock.elapsedRealtime();
+            mAnimationProvider = new AppToOverviewAnimationProvider<>(mActivityInterface,
+                    ActivityManagerWrapper.getInstance().getRunningTask(), mDeviceState);
+
+            // Preload the plan
+            mRecentsModel.getTasks(null);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
 
         void removeListener(RecentsAnimationListener listener) {
@@ -330,5 +353,52 @@ public class OverviewCommandHelper {
                 mActiveCallbacks.removeListener(listener);
             }
         }
+<<<<<<< HEAD
+=======
+
+        protected boolean handleCommand(long elapsedTime) {
+            // TODO: We need to fix this case with PIP, when an activity first enters PIP, it shows
+            //       the menu activity which takes window focus, preventing the right condition from
+            //       being run below
+            RecentsView recents = mActivityInterface.getVisibleRecentsView();
+            if (recents != null) {
+                // Launch the next task
+                recents.showNextTask();
+                return true;
+            } else if (elapsedTime < ViewConfiguration.getDoubleTapTimeout()) {
+                // The user tried to launch back into overview too quickly, either after
+                // launching an app, or before overview has actually shown, just ignore for now
+                return true;
+            }
+            return false;
+        }
+
+        private boolean onActivityReady(Boolean wasVisible) {
+            final T activity = mActivityInterface.getCreatedActivity();
+            return mAnimationProvider.onActivityReady(activity, wasVisible);
+        }
+
+        private AnimatorSet createWindowAnimation(RemoteAnimationTargetCompat[] appTargets,
+                RemoteAnimationTargetCompat[] wallpaperTargets) {
+            if (LatencyTrackerCompat.isEnabled(mContext)) {
+                LatencyTrackerCompat.logToggleRecents(
+                        (int) (SystemClock.uptimeMillis() - mToggleClickedTime));
+            }
+
+            mListener.unregister();
+
+            AnimatorSet animatorSet = mAnimationProvider.createWindowAnimation(appTargets,
+                    wallpaperTargets);
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    onTransitionComplete();
+                }
+            });
+            return animatorSet;
+        }
+
+        protected void onTransitionComplete() { }
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 }

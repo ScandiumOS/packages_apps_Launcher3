@@ -64,10 +64,17 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.anim.AnimatorPlaybackController;
 import com.android.launcher3.anim.PendingAnimation;
+<<<<<<< HEAD
 import com.android.launcher3.states.StateAnimationConfig;
 import com.android.launcher3.touch.BaseSwipeDetector;
 import com.android.launcher3.touch.BothAxesSwipeDetector;
 import com.android.launcher3.uioverrides.QuickstepLauncher;
+=======
+import com.android.launcher3.graphics.OverviewScrim;
+import com.android.launcher3.states.StateAnimationConfig;
+import com.android.launcher3.touch.BaseSwipeDetector;
+import com.android.launcher3.touch.BothAxesSwipeDetector;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.TouchController;
 import com.android.quickstep.AnimatedFloat;
 import com.android.quickstep.SystemUiProxy;
@@ -314,8 +321,11 @@ public class NoButtonQuickSwitchTouchController implements TouchController,
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     onAnimationToStateCompleted(OVERVIEW);
+<<<<<<< HEAD
                     // Animate the icon after onAnimationToStateCompleted() so it doesn't clobber.
                     mRecentsView.animateUpTaskIconScale();
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
                 }
             });
             overviewAnim.start();
@@ -437,12 +447,19 @@ public class NoButtonQuickSwitchTouchController implements TouchController,
                 .withSrcState(LAUNCHER_STATE_HOME)
                 .withDstState(targetState.statsLogOrdinal)
                 .log(getLauncherAtomEvent(mStartState.statsLogOrdinal, targetState.statsLogOrdinal,
+<<<<<<< HEAD
                         targetState == QUICK_SWITCH
                                 ? LAUNCHER_QUICKSWITCH_RIGHT
                                 : targetState.ordinal > mStartState.ordinal
                                         ? LAUNCHER_UNKNOWN_SWIPEUP
                                         : LAUNCHER_UNKNOWN_SWIPEDOWN));
         mLauncher.getStateManager().goToState(targetState, false, forEndCallback(this::clearState));
+=======
+                        targetState.ordinal > mStartState.ordinal
+                                ? LAUNCHER_UNKNOWN_SWIPEUP
+                                : LAUNCHER_UNKNOWN_SWIPEDOWN));
+        mLauncher.getStateManager().goToState(targetState, false, this::clearState);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     private void cancelAnimations() {

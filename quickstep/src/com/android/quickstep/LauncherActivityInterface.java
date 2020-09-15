@@ -43,10 +43,14 @@ import com.android.launcher3.statehandlers.DepthController.ClampedDepthProperty;
 import com.android.launcher3.statemanager.StateManager;
 import com.android.launcher3.taskbar.LauncherTaskbarUIController;
 import com.android.launcher3.touch.PagedOrientationHandler;
+<<<<<<< HEAD
 import com.android.launcher3.uioverrides.QuickstepLauncher;
 import com.android.launcher3.util.DisplayController;
 import com.android.launcher3.util.NavigationMode;
 import com.android.quickstep.GestureState.GestureEndTarget;
+=======
+import com.android.quickstep.SysUINavigationMode.Mode;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.util.ActivityInitListener;
 import com.android.quickstep.util.AnimatorControllerWithResistance;
 import com.android.quickstep.util.LayoutUtils;
@@ -220,7 +224,10 @@ public final class LauncherActivityInterface extends
             }
         }
 
+<<<<<<< HEAD
         closeOverlay();
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         launcher.getStateManager().goToState(OVERVIEW,
                 launcher.getStateManager().shouldAnimateStateChange(),
                 onCompleteCallback == null ? null : forEndCallback(onCompleteCallback));

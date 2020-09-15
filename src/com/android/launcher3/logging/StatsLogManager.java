@@ -53,11 +53,14 @@ public class StatsLogManager implements ResourceBasedOverride {
     public static final int LAUNCHER_STATE_ALLAPPS = 4;
     public static final int LAUNCHER_STATE_UNCHANGED = 5;
 
+<<<<<<< HEAD
     private InstanceId mInstanceId;
 
     protected @Nullable ActivityContext mActivityContext = null;
     private KeyboardStateManager mKeyboardStateManager;
 
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     /**
      * Returns event enum based on the two state transition information when swipe
      * gesture happens(to be removed during UserEventDispatcher cleanup).
@@ -359,7 +362,26 @@ public class StatsLogManager implements ResourceBasedOverride {
         LAUNCHER_FOLDER_CONVERTED_TO_ICON(646),
 
         @UiEvent(doc = "A hotseat prediction item was pinned")
+<<<<<<< HEAD
         LAUNCHER_HOTSEAT_PREDICTION_PINNED(647),
+=======
+        LAUNCHER_HOTSEAT_PREDICTION_PINNED(629),
+
+        @UiEvent(doc = "Activity to add external item was started")
+        LAUNCHER_ADD_EXTERNAL_ITEM_START(641),
+
+        @UiEvent(doc = "Activity to add external item was cancelled")
+        LAUNCHER_ADD_EXTERNAL_ITEM_CANCELLED(642),
+
+        @UiEvent(doc = "Activity to add external item was backed out")
+        LAUNCHER_ADD_EXTERNAL_ITEM_BACK(643),
+
+        @UiEvent(doc = "Item was placed automatically in external item addition flow")
+        LAUNCHER_ADD_EXTERNAL_ITEM_PLACED_AUTOMATICALLY(644),
+
+        @UiEvent(doc = "Item was dragged in external item addition flow")
+        LAUNCHER_ADD_EXTERNAL_ITEM_DRAGGED(645),
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
         @UiEvent(doc = "Undo event was tapped.")
         LAUNCHER_UNDO(648),
@@ -375,6 +397,7 @@ public class StatsLogManager implements ResourceBasedOverride {
 
         @UiEvent(doc = "Notification dismissed by swiping right.")
         LAUNCHER_NOTIFICATION_DISMISSED(652),
+<<<<<<< HEAD
 
         @UiEvent(doc = "Current grid size is changed to 6.")
         LAUNCHER_GRID_SIZE_6(930),
@@ -599,6 +622,8 @@ public class StatsLogManager implements ResourceBasedOverride {
 
         @UiEvent(doc = "User has invoked split to left half from an app icon menu")
         LAUNCHER_APP_ICON_MENU_SPLIT_LEFT_TOP(1200)
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         ;
 
         // ADD MORE

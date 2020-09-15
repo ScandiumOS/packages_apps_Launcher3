@@ -72,13 +72,20 @@ import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.anim.Interpolators;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.anim.PendingAnimation;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.model.data.WorkspaceItemInfo;
 import com.android.launcher3.popup.SystemShortcut;
 import com.android.launcher3.statemanager.StatefulActivity;
 import com.android.launcher3.testing.TestLogging;
 import com.android.launcher3.testing.shared.TestProtocol;
 import com.android.launcher3.touch.PagedOrientationHandler;
+<<<<<<< HEAD
 import com.android.launcher3.util.ActivityOptionsWrapper;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.RunnableList;
 import com.android.launcher3.util.SplitConfigurationOptions;
@@ -561,11 +568,53 @@ public class TaskView extends FrameLayout implements Reusable {
         return mIconView;
     }
 
+<<<<<<< HEAD
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         RecentsView recentsView = getRecentsView();
         if (recentsView == null || mTask == null) {
             return false;
+=======
+    public AnimatorPlaybackController createLaunchAnimationForRunningTask() {
+        final PendingAnimation pendingAnimation = getRecentsView().createTaskLaunchAnimation(
+                this, RECENTS_LAUNCH_DURATION, TOUCH_RESPONSE_INTERPOLATOR);
+        AnimatorPlaybackController currentAnimation = pendingAnimation.createPlaybackController();
+        currentAnimation.setEndAction(() -> {
+            pendingAnimation.finish(true);
+            launchTask(false);
+        });
+        return currentAnimation;
+    }
+
+    public void launchTask(boolean animate) {
+        launchTask(animate, false /* freezeTaskList */);
+    }
+
+    public void launchTask(boolean animate, boolean freezeTaskList) {
+        launchTask(animate, freezeTaskList, (result) -> {
+            if (!result) {
+                notifyTaskLaunchFailed(TAG);
+            }
+        }, getHandler());
+    }
+
+    public void launchTask(boolean animate, Consumer<Boolean> resultCallback,
+            Handler resultCallbackHandler) {
+        launchTask(animate, false /* freezeTaskList */, resultCallback, resultCallbackHandler);
+    }
+
+    public void launchTask(boolean animate, boolean freezeTaskList, Consumer<Boolean> resultCallback,
+            Handler resultCallbackHandler) {
+        if (ENABLE_QUICKSTEP_LIVE_TILE.get()) {
+            if (isRunningTask()) {
+                getRecentsView().finishRecentsAnimation(false /* toRecents */,
+                        () -> resultCallbackHandler.post(() -> resultCallback.accept(true)));
+            } else {
+                launchTaskInternal(animate, freezeTaskList, resultCallback, resultCallbackHandler);
+            }
+        } else {
+            launchTaskInternal(animate, freezeTaskList, resultCallback, resultCallbackHandler);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
         SplitSelectStateController splitSelectStateController =
                 recentsView.getSplitSelectController();
@@ -853,6 +902,7 @@ public class TaskView extends FrameLayout implements Reusable {
         }
     }
 
+<<<<<<< HEAD
     private boolean showTaskMenu(IconView iconView) {
         if (!getRecentsView().canLaunchFullscreenTask()) {
             // Don't show menu when selecting second split screen app
@@ -861,12 +911,22 @@ public class TaskView extends FrameLayout implements Reusable {
 
         if (!mActivity.getDeviceProfile().isTablet
                 && !getRecentsView().isClearAllHidden()) {
+=======
+    private boolean showTaskMenu() {
+        if (!getRecentsView().isClearAllHidden()) {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             getRecentsView().snapToPage(getRecentsView().indexOfChild(this));
             return false;
         } else {
             mActivity.getStatsLogManager().logger().withItemInfo(getItemInfo())
                     .log(LAUNCHER_TASK_ICON_TAP_OR_LONGPRESS);
+<<<<<<< HEAD
             return showTaskMenuWithContainer(iconView);
+=======
+            if (mMenuView != null) {
+                mMenuView.addOnAttachStateChangeListener(mTaskMenuStateListener);
+            }
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
     }
 
@@ -884,6 +944,7 @@ public class TaskView extends FrameLayout implements Reusable {
 
     protected void setIcon(IconView iconView, @Nullable Drawable icon) {
         if (icon != null) {
+<<<<<<< HEAD
             iconView.setDrawable(icon);
             iconView.setOnClickListener(v -> {
                 if (confirmSecondSplitSelectApp()) {
@@ -894,6 +955,13 @@ public class TaskView extends FrameLayout implements Reusable {
             iconView.setOnLongClickListener(v -> {
                 requestDisallowInterceptTouchEvent(true);
                 return showTaskMenu(iconView);
+=======
+            mIconView.setDrawable(icon);
+            mIconView.setOnClickListener(v -> showTaskMenu());
+            mIconView.setOnLongClickListener(v -> {
+                requestDisallowInterceptTouchEvent(true);
+                return showTaskMenu();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             });
         } else {
             iconView.setDrawable(null);

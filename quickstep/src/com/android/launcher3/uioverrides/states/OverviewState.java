@@ -17,6 +17,12 @@ package com.android.launcher3.uioverrides.states;
 
 import static com.android.launcher3.anim.Interpolators.DEACCEL_2;
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_OVERVIEW;
+<<<<<<< HEAD
+=======
+import static com.android.quickstep.SysUINavigationMode.Mode.NO_BUTTON;
+import static com.android.quickstep.SysUINavigationMode.hideShelfInTwoButtonLandscape;
+import static com.android.quickstep.SysUINavigationMode.removeShelfFromOverview;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -28,9 +34,14 @@ import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherState;
 import com.android.launcher3.R;
+<<<<<<< HEAD
 import com.android.launcher3.Utilities;
 import com.android.launcher3.util.DisplayController;
 import com.android.launcher3.util.Themes;
+=======
+import com.android.launcher3.Workspace;
+import com.android.quickstep.SysUINavigationMode;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.util.LayoutUtils;
 import com.android.quickstep.views.RecentsView;
 import com.android.quickstep.views.TaskView;

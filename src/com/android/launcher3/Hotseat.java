@@ -27,17 +27,23 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+<<<<<<< HEAD
 import androidx.annotation.Nullable;
 
 import java.util.function.Consumer;
 
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 /**
  * View class that represents the bottom row of the home screen.
  */
 public class Hotseat extends CellLayout implements Insettable {
+<<<<<<< HEAD
 
     // Ratio of empty space, qsb should take up to appear visually centered.
     public static final float QSB_CENTER_FACTOR = .325f;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
     @ViewDebug.ExportedProperty(category = "launcher")
     private boolean mHasVerticalHotseat;

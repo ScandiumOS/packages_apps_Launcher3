@@ -81,7 +81,11 @@ android {
             java.srcDirs = ['src', 'src_plugins']
             manifest.srcFile 'AndroidManifest-common.xml'
             proto {
+<<<<<<< HEAD
                 srcDirs = ['protos/', 'protos_overrides/']
+=======
+                srcDir 'protos/'
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             }
         }
 
@@ -151,6 +155,12 @@ dependencies {
     implementation "androidx.preference:preference:${ANDROID_X_VERSION}"
     implementation project(':IconLoader')
     withQuickstepImplementation project(':SharedLibWrapper')
+<<<<<<< HEAD
+=======
+
+    // Recents lib dependency
+    withQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
     // Required for AOSP to compile. This is already included in the sysui_shared.jar
     withoutQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'plugin_core.jar')
@@ -170,7 +180,11 @@ dependencies {
 protobuf {
     // Configure the protoc executable
     protoc {
+<<<<<<< HEAD
         artifact = "com.google.protobuf:protoc:${protocVersion}${PROTO_ARCH_SUFFIX}"
+=======
+        artifact = "com.google.protobuf:protoc:${protocVersion}"
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
     generateProtoTasks {
         all().each { task ->

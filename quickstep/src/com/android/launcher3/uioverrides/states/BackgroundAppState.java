@@ -16,7 +16,10 @@
 package com.android.launcher3.uioverrides.states;
 
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_BACKGROUND;
+<<<<<<< HEAD
 import static com.android.quickstep.TaskAnimationManager.ENABLE_SHELL_TRANSITIONS;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.content.Context;
 import android.graphics.Color;

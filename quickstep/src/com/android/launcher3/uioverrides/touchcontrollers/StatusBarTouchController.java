@@ -19,7 +19,10 @@ import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MOVE;
 import static android.view.MotionEvent.ACTION_UP;
+<<<<<<< HEAD
 import static android.view.WindowManager.LayoutParams.FLAG_SLIPPERY;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_SWIPE_DOWN_WORKSPACE_NOTISHADE_OPEN;
 

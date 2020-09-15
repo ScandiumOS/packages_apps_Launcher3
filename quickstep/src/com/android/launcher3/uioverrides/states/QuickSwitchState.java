@@ -17,10 +17,14 @@ package com.android.launcher3.uioverrides.states;
 
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_BACKGROUND;
 
+<<<<<<< HEAD
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.util.Themes;
+=======
+import com.android.launcher3.Launcher;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 /**
  * State to indicate we are about to launch a recent task. Note that this state is only used when

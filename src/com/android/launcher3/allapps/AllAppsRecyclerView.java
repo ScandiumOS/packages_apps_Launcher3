@@ -15,10 +15,16 @@
  */
 package com.android.launcher3.allapps;
 
+<<<<<<< HEAD
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ALLAPPS_SCROLLED;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ALLAPPS_VERTICAL_SWIPE_BEGIN;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ALLAPPS_VERTICAL_SWIPE_END;
 import static com.android.launcher3.util.LogConfig.SEARCH_LOGGING;
+=======
+import static android.view.View.MeasureSpec.EXACTLY;
+import static android.view.View.MeasureSpec.UNSPECIFIED;
+import static android.view.View.MeasureSpec.makeMeasureSpec;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -31,9 +37,13 @@ import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.FastScrollRecyclerView;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.R;
+<<<<<<< HEAD
 import com.android.launcher3.Utilities;
 import com.android.launcher3.logging.StatsLogManager;
 import com.android.launcher3.views.ActivityContext;
+=======
+import com.android.launcher3.allapps.AllAppsGridAdapter.AppsGridLayoutManager;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.views.RecyclerViewFastScroller;
 
 import java.util.List;
@@ -41,10 +51,14 @@ import java.util.List;
 /**
  * A RecyclerView with custom fast scroll support for the all apps view.
  */
+<<<<<<< HEAD
 public class AllAppsRecyclerView extends FastScrollRecyclerView {
     protected static final String TAG = "AllAppsRecyclerView";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LATENCY = Utilities.isPropertyEnabled(SEARCH_LOGGING);
+=======
+public class AllAppsRecyclerView extends BaseRecyclerView {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
     protected final int mNumAppsPerRow;
     private final AllAppsFastScrollHelper mFastScrollHelper;
@@ -106,6 +120,33 @@ public class AllAppsRecyclerView extends FastScrollRecyclerView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         updatePoolSize();
+<<<<<<< HEAD
+=======
+        for (int i = 0; i < mAutoSizedOverlays.size(); i++) {
+            View overlay = mAutoSizedOverlays.get(i);
+            overlay.measure(makeMeasureSpec(w, EXACTLY), makeMeasureSpec(w, EXACTLY));
+            overlay.layout(0, 0, w, h);
+        }
+    }
+
+    /**
+     * Adds an overlay that automatically rescales with the recyclerview.
+     */
+    public void addAutoSizedOverlay(View overlay) {
+        mAutoSizedOverlays.add(overlay);
+        getOverlay().add(overlay);
+        onSizeChanged(getWidth(), getHeight(), getWidth(), getHeight());
+    }
+
+    /**
+     * Clears auto scaling overlay views added by #addAutoSizedOverlay
+     */
+    public void clearAutoSizedOverlays() {
+        for (View v : mAutoSizedOverlays) {
+            getOverlay().remove(v);
+        }
+        mAutoSizedOverlays.clear();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     public void onSearchResultsChanged() {

@@ -101,6 +101,49 @@ public class PortraitStatesTouchController extends AbstractStateChangeTouchContr
         return fromState;
     }
 
+<<<<<<< HEAD
+=======
+    private StateAnimationConfig getNormalToOverviewAnimation() {
+        mAllAppsInterpolatorWrapper.baseInterpolator = LINEAR;
+
+        StateAnimationConfig builder = new StateAnimationConfig();
+        builder.setInterpolator(ANIM_VERTICAL_PROGRESS, mAllAppsInterpolatorWrapper);
+        return builder;
+    }
+
+    private static StateAnimationConfig getOverviewToAllAppsAnimation() {
+        StateAnimationConfig builder = new StateAnimationConfig();
+        builder.setInterpolator(ANIM_ALL_APPS_FADE, Interpolators.clampToProgress(ACCEL,
+                0, ALL_APPS_CONTENT_FADE_THRESHOLD));
+        builder.setInterpolator(ANIM_OVERVIEW_FADE, Interpolators.clampToProgress(DEACCEL,
+                RECENTS_FADE_THRESHOLD, 1));
+        return builder;
+    }
+
+    private StateAnimationConfig getAllAppsToOverviewAnimation() {
+        StateAnimationConfig builder = new StateAnimationConfig();
+        builder.setInterpolator(ANIM_ALL_APPS_FADE, Interpolators.clampToProgress(DEACCEL,
+                1 - ALL_APPS_CONTENT_FADE_THRESHOLD, 1));
+        builder.setInterpolator(ANIM_OVERVIEW_FADE, Interpolators.clampToProgress(ACCEL,
+                0f, 1 - RECENTS_FADE_THRESHOLD));
+        return builder;
+    }
+
+    private StateAnimationConfig getNormalToAllAppsAnimation() {
+        StateAnimationConfig builder = new StateAnimationConfig();
+        builder.setInterpolator(ANIM_ALL_APPS_FADE, Interpolators.clampToProgress(ACCEL,
+                0, ALL_APPS_CONTENT_FADE_THRESHOLD));
+        return builder;
+    }
+
+    private StateAnimationConfig getAllAppsToNormalAnimation() {
+        StateAnimationConfig builder = new StateAnimationConfig();
+        builder.setInterpolator(ANIM_ALL_APPS_FADE, Interpolators.clampToProgress(DEACCEL,
+                1 - ALL_APPS_CONTENT_FADE_THRESHOLD, 1));
+        return builder;
+    }
+
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     @Override
     protected StateAnimationConfig getConfigForStates(
             LauncherState fromState, LauncherState toState) {
@@ -159,7 +202,47 @@ public class PortraitStatesTouchController extends AbstractStateChangeTouchContr
         return 1 / totalShift;
     }
 
+<<<<<<< HEAD
     @Override
+=======
+    private void cancelPendingAnim() {
+        if (mPendingAnimation != null) {
+            mPendingAnimation.finish(false);
+            mPendingAnimation = null;
+        }
+    }
+
+    @Override
+    protected void updateSwipeCompleteAnimation(ValueAnimator animator, long expectedDuration,
+            LauncherState targetState, float velocity, boolean isFling) {
+        super.updateSwipeCompleteAnimation(animator, expectedDuration, targetState,
+                velocity, isFling);
+        handleFirstSwipeToOverview(animator, expectedDuration, targetState, velocity, isFling);
+    }
+
+    private void handleFirstSwipeToOverview(final ValueAnimator animator,
+            final long expectedDuration, final LauncherState targetState, final float velocity,
+            final boolean isFling) {
+        if (UNSTABLE_SPRINGS.get() && mFromState == OVERVIEW && mToState == ALL_APPS
+                && targetState == OVERVIEW) {
+            mFinishFastOnSecondTouch = true;
+        } else  if (mFromState == NORMAL && mToState == OVERVIEW && targetState == OVERVIEW) {
+            mFinishFastOnSecondTouch = true;
+            if (isFling && expectedDuration != 0) {
+                // Update all apps interpolator to add a bit of overshoot starting from currFraction
+                final float currFraction = mCurrentAnimation.getProgressFraction();
+                mAllAppsInterpolatorWrapper.baseInterpolator = Interpolators.clampToProgress(
+                        Interpolators.overshootInterpolatorForVelocity(velocity), currFraction, 1);
+                animator.setDuration(Math.min(expectedDuration, ATOMIC_DURATION))
+                        .setInterpolator(LINEAR);
+            }
+        } else {
+            mFinishFastOnSecondTouch = false;
+        }
+    }
+
+    @Override
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     protected void onSwipeInteractionCompleted(LauncherState targetState) {
         super.onSwipeInteractionCompleted(targetState);
         if (mStartState == NORMAL && targetState == OVERVIEW) {

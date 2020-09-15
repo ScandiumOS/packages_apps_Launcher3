@@ -168,8 +168,16 @@ public final class RecentsActivity extends StatefulActivity<RecentsState> {
         ACTIVITY_TRACKER.handleNewIntent(this);
     }
 
+<<<<<<< HEAD
     @Override
     protected void onHandleConfigurationChanged() {
+=======
+    /**
+         * Logic for when device configuration changes (rotation, screen size change, multi-window,
+         * etc.)
+         */
+    protected void onHandleConfigChanged() {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         initDeviceProfile();
 
         AbstractFloatingView.closeOpenViews(this, true,

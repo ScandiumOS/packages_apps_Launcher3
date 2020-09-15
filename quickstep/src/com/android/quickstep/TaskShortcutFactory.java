@@ -20,6 +20,10 @@ import static android.app.WindowConfiguration.WINDOWING_MODE_FREEFORM;
 
 import static com.android.launcher3.config.FeatureFlags.ENABLE_OVERVIEW_SELECTIONS;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_SYSTEM_SHORTCUT_FREE_FORM_TAP;
+<<<<<<< HEAD
+=======
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_SYSTEM_SHORTCUT_SPLIT_SCREEN_TAP;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -45,7 +49,11 @@ import com.android.launcher3.logging.StatsLogManager.LauncherEvent;
 import com.android.launcher3.model.WellbeingModel;
 import com.android.launcher3.popup.SystemShortcut;
 import com.android.launcher3.popup.SystemShortcut.AppInfo;
+<<<<<<< HEAD
 import com.android.launcher3.touch.PagedOrientationHandler;
+=======
+import com.android.launcher3.util.Executors;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.InstantAppResolver;
 import com.android.launcher3.util.PackageManagerHelper;
 import com.android.launcher3.util.SplitConfigurationOptions.SplitPositionOption;
@@ -224,9 +232,29 @@ public interface TaskShortcutFactory {
             }
         }
 
+<<<<<<< HEAD
         private ActivityOptions makeLaunchOptions(Activity activity) {
             ActivityOptions activityOptions = ActivityOptions.makeBasic();
             activityOptions.setLaunchWindowingMode(WINDOWING_MODE_FREEFORM);
+=======
+        @Override
+        protected boolean onActivityStarted(BaseDraggingActivity activity) {
+            return true;
+        }
+    };
+
+    TaskShortcutFactory FREE_FORM = new MultiWindowFactory(R.drawable.ic_split_screen,
+            R.string.recent_task_option_freeform, LAUNCHER_SYSTEM_SHORTCUT_FREE_FORM_TAP) {
+
+        @Override
+        protected boolean isAvailable(BaseDraggingActivity activity, int displayId) {
+            return ActivityManagerWrapper.getInstance().supportsFreeformMultiWindow(activity);
+        }
+
+        @Override
+        protected ActivityOptions makeLaunchOptions(Activity activity) {
+            ActivityOptions activityOptions = ActivityOptionsCompat.makeFreeformOptions();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             // Arbitrary bounds only because freeform is in dev mode right now
             final View decorView = activity.getWindow().getDecorView();
             final WindowInsets insets = decorView.getRootWindowInsets();

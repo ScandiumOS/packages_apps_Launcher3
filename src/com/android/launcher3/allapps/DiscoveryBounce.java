@@ -17,6 +17,10 @@
 package com.android.launcher3.allapps;
 
 import static com.android.launcher3.LauncherState.NORMAL;
+<<<<<<< HEAD
+=======
+import static com.android.launcher3.LauncherState.OVERVIEW;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -136,7 +140,45 @@ public class DiscoveryBounce extends AbstractFloatingView {
             return;
         }
         onboardingPrefs.incrementEventCount(OnboardingPrefs.HOME_BOUNCE_COUNT);
+<<<<<<< HEAD
         new DiscoveryBounce(launcher).show();
+=======
+
+        new DiscoveryBounce(launcher, 0).show();
+    }
+
+    public static void showForOverviewIfNeeded(Launcher launcher,
+                                               PagedOrientationHandler orientationHandler) {
+        showForOverviewIfNeeded(launcher, true, orientationHandler);
+    }
+
+    private static void showForOverviewIfNeeded(Launcher launcher, boolean withDelay,
+                                                PagedOrientationHandler orientationHandler) {
+        OnboardingPrefs onboardingPrefs = launcher.getOnboardingPrefs();
+        if (!launcher.isInState(OVERVIEW)
+                || !launcher.hasBeenResumed()
+                || launcher.isForceInvisible()
+                || launcher.getDeviceProfile().isVerticalBarLayout()
+                || !orientationHandler.isLayoutNaturalToLauncher()
+                || onboardingPrefs.getBoolean(OnboardingPrefs.SHELF_BOUNCE_SEEN)
+                || launcher.getSystemService(UserManager.class).isDemoUser()
+                || Utilities.IS_RUNNING_IN_TEST_HARNESS) {
+            return;
+        }
+
+        if (withDelay) {
+            new Handler().postDelayed(() -> showForOverviewIfNeeded(launcher, false,
+                    orientationHandler), DELAY_MS);
+            return;
+        } else if (AbstractFloatingView.getTopOpenView(launcher) != null) {
+            // TODO: Move these checks to the top and call this method after invalidate handler.
+            return;
+        }
+        onboardingPrefs.incrementEventCount(OnboardingPrefs.SHELF_BOUNCE_COUNT);
+
+        new DiscoveryBounce(launcher, (1 - OVERVIEW.getVerticalProgress(launcher)))
+                .show();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     /**

@@ -16,7 +16,10 @@
 
 package com.android.launcher3.dragndrop;
 
+<<<<<<< HEAD
 import static com.android.launcher3.LauncherSettings.Favorites.CONTAINER_PIN_WIDGETS;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ADD_EXTERNAL_ITEM_BACK;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ADD_EXTERNAL_ITEM_CANCELLED;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ADD_EXTERNAL_ITEM_DRAGGED;
@@ -63,10 +66,14 @@ import com.android.launcher3.model.ItemInstallQueue;
 import com.android.launcher3.model.WidgetItem;
 import com.android.launcher3.model.data.ItemInfo;
 import com.android.launcher3.pm.PinRequestHelper;
+<<<<<<< HEAD
 import com.android.launcher3.util.PackageManagerHelper;
 import com.android.launcher3.util.PackageUserKey;
 import com.android.launcher3.util.SystemUiController;
 import com.android.launcher3.views.AbstractSlideInView;
+=======
+import com.android.launcher3.util.InstantAppResolver;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.views.BaseDragLayer;
 import com.android.launcher3.widget.AddItemWidgetsBottomSheet;
 import com.android.launcher3.widget.LauncherAppWidgetHost;
@@ -317,7 +324,11 @@ public class AddItemActivity extends BaseActivity
      */
     public void onCancelClick(View v) {
         logCommand(LAUNCHER_ADD_EXTERNAL_ITEM_CANCELLED);
+<<<<<<< HEAD
         mSlideInView.close(/* animate= */ true);
+=======
+        finish();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     /**
@@ -325,8 +336,12 @@ public class AddItemActivity extends BaseActivity
      */
     public void onPlaceAutomaticallyClick(View v) {
         if (mRequest.getRequestType() == PinItemRequest.REQUEST_TYPE_SHORTCUT) {
+<<<<<<< HEAD
             ShortcutInfo shortcutInfo = mRequest.getShortcutInfo();
             ItemInstallQueue.INSTANCE.get(this).queueItem(shortcutInfo);
+=======
+            ItemInstallQueue.INSTANCE.get(this).queueItem(mRequest.getShortcutInfo());
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             logCommand(LAUNCHER_ADD_EXTERNAL_ITEM_PLACED_AUTOMATICALLY);
             mRequest.accept();
             CharSequence label = shortcutInfo.getLongLabel();
@@ -359,13 +374,21 @@ public class AddItemActivity extends BaseActivity
         mWidgetOptions.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         mRequest.accept(mWidgetOptions);
         logCommand(LAUNCHER_ADD_EXTERNAL_ITEM_PLACED_AUTOMATICALLY);
+<<<<<<< HEAD
         mSlideInView.close(/* animate= */ true);
+=======
+        finish();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     @Override
     public void onBackPressed() {
         logCommand(LAUNCHER_ADD_EXTERNAL_ITEM_BACK);
+<<<<<<< HEAD
         mSlideInView.close(/* animate= */ true);
+=======
+        super.onBackPressed();
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     @Override
@@ -404,6 +427,7 @@ public class AddItemActivity extends BaseActivity
         return mDragLayer;
     }
 
+<<<<<<< HEAD
     @Override
     public void onSlideInViewClosed() {
         finish();
@@ -432,5 +456,9 @@ public class AddItemActivity extends BaseActivity
         getStatsLogManager().logger()
                 .withItemInfo((ItemInfo) mWidgetCell.getWidgetView().getTag())
                 .log(command);
+=======
+    private void logCommand(StatsLogManager.EventEnum command) {
+        getStatsLogManager().logger().log(command);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 }

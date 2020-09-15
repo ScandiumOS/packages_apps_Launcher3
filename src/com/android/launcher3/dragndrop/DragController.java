@@ -151,9 +151,80 @@ public abstract class DragController<T extends ActivityContext>
         if (TestProtocol.sDebugTracing) {
             Log.d(TestProtocol.NO_DROP_TARGET, "4");
         }
+<<<<<<< HEAD
         return startDrag(drawable, /* view= */ null, originalView, dragLayerX, dragLayerY,
                 source, dragInfo, dragOffset, dragRegion, initialDragViewScale, dragViewScaleOnDrop,
                 options);
+=======
+
+        mLauncher.hideKeyboard();
+        AbstractFloatingView.closeOpenViews(mLauncher, false, TYPE_DISCOVERY_BOUNCE);
+
+        mOptions = options;
+        if (mOptions.simulatedDndStartPoint != null) {
+            mLastTouch.x = mMotionDown.x = mOptions.simulatedDndStartPoint.x;
+            mLastTouch.y = mMotionDown.y = mOptions.simulatedDndStartPoint.y;
+        }
+
+        final int registrationX = mMotionDown.x - dragLayerX;
+        final int registrationY = mMotionDown.y - dragLayerY;
+
+        final int dragRegionLeft = dragRegion == null ? 0 : dragRegion.left;
+        final int dragRegionTop = dragRegion == null ? 0 : dragRegion.top;
+
+        mLastDropTarget = null;
+
+        mDragObject = new DropTarget.DragObject(mLauncher.getApplicationContext());
+        mDragObject.originalView = originalView;
+
+        mIsInPreDrag = mOptions.preDragCondition != null
+                && !mOptions.preDragCondition.shouldStartDrag(0);
+
+        final Resources res = mLauncher.getResources();
+        final float scaleDps = mIsInPreDrag
+                ? res.getDimensionPixelSize(R.dimen.pre_drag_view_scale) : 0f;
+        final DragView dragView = mDragObject.dragView = new DragView(mLauncher, b, registrationX,
+                registrationY, initialDragViewScale, dragViewScaleOnDrop, scaleDps);
+        dragView.setItemInfo(dragInfo);
+        mDragObject.dragComplete = false;
+
+        mDragObject.xOffset = mMotionDown.x - (dragLayerX + dragRegionLeft);
+        mDragObject.yOffset = mMotionDown.y - (dragLayerY + dragRegionTop);
+
+        mDragDriver = DragDriver.create(this, mOptions, mFlingToDeleteHelper::recordMotionEvent);
+        if (!mOptions.isAccessibleDrag) {
+            mDragObject.stateAnnouncer = DragViewStateAnnouncer.createFor(dragView);
+        }
+
+        mDragObject.dragSource = source;
+        mDragObject.dragInfo = dragInfo;
+        mDragObject.originalDragInfo = mDragObject.dragInfo.makeShallowCopy();
+
+        if (dragOffset != null) {
+            dragView.setDragVisualizeOffset(new Point(dragOffset));
+        }
+        if (dragRegion != null) {
+            dragView.setDragRegion(new Rect(dragRegion));
+        }
+
+        mLauncher.getDragLayer().performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+        dragView.show(mLastTouch.x, mLastTouch.y);
+        mDistanceSinceScroll = 0;
+
+        if (!mIsInPreDrag) {
+            callOnDragStart();
+        } else if (mOptions.preDragCondition != null) {
+            mOptions.preDragCondition.onPreDragStart(mDragObject);
+        }
+
+        handleMoveEvent(mLastTouch.x, mLastTouch.y);
+
+        if (!mLauncher.isTouchInProgress() && options.simulatedDndStartPoint == null) {
+            // If it is an internal drag and the touch is already complete, cancel immediately
+            MAIN_EXECUTOR.submit(this::cancelDrag);
+        }
+        return dragView;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     /**

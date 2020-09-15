@@ -16,6 +16,7 @@
 package com.android.launcher3;
 
 import static com.android.launcher3.anim.Interpolators.ACCEL_2;
+<<<<<<< HEAD
 import static com.android.launcher3.anim.Interpolators.DEACCEL_2;
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_HOME;
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_OVERVIEW;
@@ -29,6 +30,17 @@ import static com.android.launcher3.testing.shared.TestProtocol.OVERVIEW_SPLIT_S
 import static com.android.launcher3.testing.shared.TestProtocol.OVERVIEW_STATE_ORDINAL;
 import static com.android.launcher3.testing.shared.TestProtocol.QUICK_SWITCH_STATE_ORDINAL;
 import static com.android.launcher3.testing.shared.TestProtocol.SPRING_LOADED_STATE_ORDINAL;
+=======
+import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_HOME;
+import static com.android.launcher3.testing.TestProtocol.ALL_APPS_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.BACKGROUND_APP_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.HINT_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.NORMAL_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.OVERVIEW_MODAL_TASK_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.OVERVIEW_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.QUICK_SWITCH_STATE_ORDINAL;
+import static com.android.launcher3.testing.TestProtocol.SPRING_LOADED_STATE_ORDINAL;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.content.Context;
 import android.graphics.Color;
@@ -107,7 +119,12 @@ public abstract class LauncherState implements BaseState<LauncherState> {
      */
     public static final LauncherState NORMAL = new LauncherState(NORMAL_STATE_ORDINAL,
             LAUNCHER_STATE_HOME,
+<<<<<<< HEAD
             FLAG_DISABLE_RESTORE | FLAG_WORKSPACE_ICONS_CAN_BE_DRAGGED | FLAG_HAS_SYS_UI_SCRIM) {
+=======
+            FLAG_DISABLE_RESTORE | FLAG_WORKSPACE_ICONS_CAN_BE_DRAGGED | FLAG_HIDE_BACK_BUTTON |
+                    FLAG_HAS_SYS_UI_SCRIM) {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         @Override
         public int getTransitionDuration(Context context, boolean isToState) {
             // Arbitrary duration, when going to NORMAL we use the state we're coming from instead.

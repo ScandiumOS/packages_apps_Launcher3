@@ -68,11 +68,41 @@ public class PendingAnimation extends AnimatedPropertySetter {
         addAnimationHoldersRecur(a, mDuration, springProperty, mAnimHolders);
     }
 
+<<<<<<< HEAD
     /**
      * Configures interpolator of the underlying AnimatorSet.
      */
     public void setInterpolator(TimeInterpolator interpolator) {
         mAnim.setInterpolator(interpolator);
+=======
+    public void finish(boolean isSuccess) {
+        for (Consumer<EndState> listeners : mEndListeners) {
+            listeners.accept(new EndState(isSuccess));
+        }
+        mEndListeners.clear();
+    }
+
+    @Override
+    public void setViewAlpha(View view, float alpha, TimeInterpolator interpolator) {
+        if (view == null || view.getAlpha() == alpha) {
+            return;
+        }
+        ObjectAnimator anim = ObjectAnimator.ofFloat(view, View.ALPHA, alpha);
+        anim.addListener(new AlphaUpdateListener(view));
+        anim.setInterpolator(interpolator);
+        add(anim);
+    }
+
+    @Override
+    public <T> void setFloat(T target, FloatProperty<T> property, float value,
+            TimeInterpolator interpolator) {
+        if (property.get(target) == value) {
+            return;
+        }
+        Animator anim = ObjectAnimator.ofFloat(target, property, value);
+        anim.setDuration(mDuration).setInterpolator(interpolator);
+        add(anim);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     public <T> void addFloat(T target, FloatProperty<T> property, float from, float to,
@@ -100,4 +130,24 @@ public class PendingAnimation extends AnimatedPropertySetter {
     public AnimatorPlaybackController createPlaybackController() {
         return new AnimatorPlaybackController(buildAnim(), mDuration, mAnimHolders);
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Add a listener of receiving the end state.
+     * Note that the listeners are called as a result of calling {@link #finish(boolean)}
+     * and not automatically
+     */
+    public void addEndListener(Consumer<EndState> listener) {
+        mEndListeners.add(listener);
+    }
+
+    public static class EndState {
+        public boolean isSuccess;
+
+        public EndState(boolean isSuccess) {
+            this.isSuccess = isSuccess;
+        }
+    }
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 }

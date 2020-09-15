@@ -85,6 +85,10 @@ import com.android.launcher3.logger.LauncherAtom;
 import com.android.launcher3.logging.InstanceId;
 import com.android.launcher3.logging.StatsLogManager;
 import com.android.launcher3.logging.StatsLogManager.LauncherEvent;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.model.data.AppInfo;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.model.data.FolderInfo;
 import com.android.launcher3.model.data.ItemInfo;
 import com.android.launcher3.model.data.LauncherAppWidgetInfo;
@@ -95,7 +99,10 @@ import com.android.launcher3.statemanager.StateManager;
 import com.android.launcher3.statemanager.StateManager.StateHandler;
 import com.android.launcher3.states.StateAnimationConfig;
 import com.android.launcher3.touch.WorkspaceTouchListener;
+<<<<<<< HEAD
 import com.android.launcher3.util.EdgeEffectCompat;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.Executors;
 import com.android.launcher3.util.IntArray;
 import com.android.launcher3.util.IntSet;

@@ -23,8 +23,11 @@ import androidx.core.graphics.ColorUtils;
 
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherState;
+<<<<<<< HEAD
 import com.android.launcher3.R;
 import com.android.launcher3.util.Themes;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 /**
  * Scale down workspace/hotseat to hint at going to either overview (on pause) or first home screen.
@@ -35,11 +38,15 @@ public class HintState extends LauncherState {
             | FLAG_HAS_SYS_UI_SCRIM;
 
     public HintState(int id) {
+<<<<<<< HEAD
         this(id, LAUNCHER_STATE_HOME);
     }
 
     public HintState(int id, int statsLogOrdinal) {
         super(id, statsLogOrdinal, STATE_FLAGS);
+=======
+        super(id, LAUNCHER_STATE_HOME, STATE_FLAGS);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     @Override

@@ -39,8 +39,13 @@ import com.android.launcher3.LauncherState;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.anim.AnimatorPlaybackController;
 import com.android.launcher3.states.StateAnimationConfig;
+<<<<<<< HEAD
 import com.android.launcher3.taskbar.LauncherTaskbarUIController;
 import com.android.launcher3.uioverrides.QuickstepLauncher;
+=======
+import com.android.launcher3.testing.TestProtocol;
+import com.android.launcher3.util.VibratorWrapper;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.SystemUiProxy;
 import com.android.quickstep.util.AnimatorControllerWithResistance;
 import com.android.quickstep.util.MotionPauseDetector;
@@ -205,7 +210,11 @@ public class NoButtonNavbarToOverviewTouchController extends PortraitStatesTouch
     }
 
     private void maybeSwipeInteractionToOverviewComplete() {
+<<<<<<< HEAD
         if (mReachedOverview && !mDetector.isDraggingState()) {
+=======
+        if (mReachedOverview && mDetector.isSettlingState()) {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             onSwipeInteractionCompleted(OVERVIEW);
         }
     }
@@ -247,7 +256,11 @@ public class NoButtonNavbarToOverviewTouchController extends PortraitStatesTouch
     private void goToOverviewOrHomeOnDragEnd(float velocity) {
         boolean goToHomeInsteadOfOverview = !mMotionPauseDetector.isPaused();
         if (goToHomeInsteadOfOverview) {
+<<<<<<< HEAD
             new OverviewToHomeAnim(mLauncher, () -> onSwipeInteractionCompleted(NORMAL))
+=======
+            new OverviewToHomeAnim(mLauncher, ()-> onSwipeInteractionCompleted(NORMAL))
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
                     .animateWithVelocity(velocity);
         }
         if (mReachedOverview) {

@@ -16,6 +16,12 @@
 
 package com.android.launcher3.appprediction;
 
+<<<<<<< HEAD
+=======
+import static com.android.launcher3.anim.Interpolators.LINEAR;
+import static com.android.launcher3.icons.GraphicsUtils.setColorAlphaBound;
+
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -32,6 +38,11 @@ import com.android.launcher3.BubbleTextView;
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.DeviceProfile.DeviceProfileListenable;
 import com.android.launcher3.DeviceProfile.OnDeviceProfileChangeListener;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.Launcher;
+import com.android.launcher3.LauncherAppState;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.allapps.FloatingHeaderRow;
@@ -44,15 +55,25 @@ import com.android.launcher3.model.data.ItemInfo;
 import com.android.launcher3.model.data.ItemInfoWithIcon;
 import com.android.launcher3.model.data.WorkspaceItemInfo;
 import com.android.launcher3.touch.ItemLongClickListener;
+<<<<<<< HEAD
 import com.android.launcher3.views.ActivityContext;
+=======
+import com.android.launcher3.util.Themes;
+import com.android.quickstep.AnimatedFloat;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @TargetApi(Build.VERSION_CODES.P)
+<<<<<<< HEAD
 public class PredictionRowView<T extends Context & ActivityContext & DeviceProfileListenable>
         extends LinearLayout implements OnDeviceProfileChangeListener, FloatingHeaderRow {
+=======
+public class PredictionRowView extends LinearLayout implements
+        OnDeviceProfileChangeListener, FloatingHeaderRow {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
     private final T mActivityContext;
     private int mNumPredictedAppsPerRow;
@@ -239,6 +260,30 @@ public class PredictionRowView<T extends Context & ActivityContext & DeviceProfi
         mParent.onHeightUpdated();
     }
 
+<<<<<<< HEAD
+=======
+    public void setTextAlpha(int textAlpha) {
+        mIconLastSetTextAlpha = textAlpha;
+        if (getAlpha() < 1 && textAlpha > 0) {
+            // If the entire header is translucent, make sure the text is at full opacity so it's
+            // not double-translucent. However, we support keeping the text invisible (alpha == 0).
+            textAlpha = mIconFullTextAlpha;
+        }
+        mIconCurrentTextAlpha = textAlpha;
+        int iconColor = setColorAlphaBound(mIconTextColor, mIconCurrentTextAlpha);
+        for (int i = 0; i < getChildCount(); i++) {
+            ((BubbleTextView) getChildAt(i)).setTextColor(iconColor);
+        }
+    }
+
+    @Override
+    public void setAlpha(float alpha) {
+        super.setAlpha(alpha);
+        // Reapply text alpha so that we update it to be full alpha if the row is now translucent.
+        setTextAlpha(mIconLastSetTextAlpha);
+    }
+
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     @Override
     public boolean hasOverlappingRendering() {
         return false;

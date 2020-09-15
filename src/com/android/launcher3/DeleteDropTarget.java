@@ -34,7 +34,10 @@ import com.android.launcher3.model.data.FolderInfo;
 import com.android.launcher3.model.data.ItemInfo;
 import com.android.launcher3.model.data.LauncherAppWidgetInfo;
 import com.android.launcher3.model.data.WorkspaceItemInfo;
+<<<<<<< HEAD
 import com.android.launcher3.util.IntSet;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.views.Snackbar;
 
 public class DeleteDropTarget extends ButtonDropTarget {

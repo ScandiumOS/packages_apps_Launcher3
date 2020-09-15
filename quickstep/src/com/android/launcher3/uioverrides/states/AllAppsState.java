@@ -17,6 +17,10 @@ package com.android.launcher3.uioverrides.states;
 
 import static com.android.launcher3.anim.Interpolators.DEACCEL_2;
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_ALLAPPS;
+<<<<<<< HEAD
+=======
+import static com.android.quickstep.SysUINavigationMode.removeShelfFromOverview;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 import android.content.Context;
 
@@ -26,9 +30,13 @@ import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.DeviceProfile.DeviceProfileListenable;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherState;
+<<<<<<< HEAD
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.util.Themes;
+=======
+import com.android.launcher3.allapps.AllAppsContainerView;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 /**
  * Definition for AllApps state

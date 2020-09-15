@@ -44,6 +44,7 @@ import static com.android.launcher3.anim.Interpolators.LINEAR;
 import static com.android.launcher3.anim.Interpolators.OVERSHOOT_0_75;
 import static com.android.launcher3.anim.Interpolators.clampToProgress;
 import static com.android.launcher3.config.FeatureFlags.ENABLE_QUICKSTEP_LIVE_TILE;
+<<<<<<< HEAD
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_OVERVIEW_ACTIONS_SPLIT;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_TASK_CLEAR_ALL;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_TASK_DISMISS_SWIPE_UP;
@@ -51,6 +52,13 @@ import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCH
 import static com.android.launcher3.statehandlers.DepthController.STATE_DEPTH;
 import static com.android.launcher3.touch.PagedOrientationHandler.CANVAS_TRANSLATE;
 import static com.android.launcher3.util.Executors.MAIN_EXECUTOR;
+=======
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_TASK_CLEAR_ALL;
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_TASK_DISMISS_SWIPE_UP;
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_TASK_LAUNCH_SWIPE_DOWN;
+import static com.android.launcher3.statehandlers.DepthController.DEPTH;
+import static com.android.launcher3.uioverrides.touchcontrollers.TaskViewTouchController.SUCCESS_TRANSITION_PROGRESS;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import static com.android.launcher3.util.Executors.UI_HELPER_EXECUTOR;
 import static com.android.launcher3.util.SplitConfigurationOptions.STAGE_POSITION_BOTTOM_OR_RIGHT;
 import static com.android.launcher3.util.SplitConfigurationOptions.STAGE_POSITION_TOP_OR_LEFT;
@@ -144,6 +152,11 @@ import com.android.launcher3.statemanager.BaseState;
 import com.android.launcher3.statemanager.StatefulActivity;
 import com.android.launcher3.touch.OverScroll;
 import com.android.launcher3.touch.PagedOrientationHandler;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.touch.PagedOrientationHandler.CurveProperties;
+import com.android.launcher3.util.ComponentKey;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.DynamicResource;
 import com.android.launcher3.util.IntArray;
 import com.android.launcher3.util.IntSet;
@@ -2888,7 +2901,11 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
             boolean animateTaskView, boolean shouldRemoveTask, long duration,
             boolean dismissingForSplitSelection) {
         if (mPendingAnimation != null) {
+<<<<<<< HEAD
             mPendingAnimation.createPlaybackController().dispatchOnCancel().dispatchOnEnd();
+=======
+            mPendingAnimation.finish(false);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
 
         int count = getPageCount();
@@ -3624,6 +3641,10 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
     private void runDismissAnimation(PendingAnimation pendingAnim) {
         AnimatorPlaybackController controller = pendingAnim.createPlaybackController();
         controller.dispatchOnStart();
+<<<<<<< HEAD
+=======
+        controller.setEndAction(() -> pendingAnim.finish(true));
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         controller.getAnimationPlayer().setInterpolator(FAST_OUT_SLOW_IN);
         controller.start();
     }
@@ -3648,10 +3669,13 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
     private void dismissAllTasks(View view) {
         runDismissAnimation(createAllTasksDismissAnimation(DISMISS_TASK_DURATION));
         mActivity.getStatsLogManager().logger().log(LAUNCHER_TASK_CLEAR_ALL);
+<<<<<<< HEAD
     }
 
     public void dismissAllTasks() {
         dismissAllTasks(null);
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     private void dismissCurrentTask() {

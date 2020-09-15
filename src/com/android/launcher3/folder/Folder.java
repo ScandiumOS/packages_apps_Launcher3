@@ -22,6 +22,10 @@ import static com.android.launcher3.LauncherAnimUtils.SPRING_LOADED_EXIT_DELAY;
 import static com.android.launcher3.LauncherState.NORMAL;
 import static com.android.launcher3.compat.AccessibilityManagerCompat.sendCustomAccessibilityEvent;
 import static com.android.launcher3.config.FeatureFlags.ALWAYS_USE_HARDWARE_OPTIMIZATION_FOR_FOLDER_ANIMATIONS;
+<<<<<<< HEAD
+=======
+import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_FOLDER_CONVERTED_TO_ICON;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_FOLDER_LABEL_UPDATED;
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_ITEM_DROP_COMPLETED;
 import static com.android.launcher3.util.window.RefreshRateTracker.getSingleFrameMs;
@@ -638,7 +642,11 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
      * is played.
      */
     private void animateOpen(List<WorkspaceItemInfo> items, int pageNo) {
+<<<<<<< HEAD
         Folder openFolder = getOpen(mActivityContext);
+=======
+        Folder openFolder = getOpen(mLauncher);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         if (openFolder != null && openFolder != this) {
             // Close any open folder before opening a folder.
             openFolder.close(true);
@@ -686,7 +694,10 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
             public void onAnimationEnd(Animator animation) {
                 setState(STATE_OPEN);
                 announceAccessibilityChanges();
+<<<<<<< HEAD
                 AccessibilityManagerCompat.sendFolderOpenedEventToTest(getContext());
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
                 mContent.setFocusOnFirstChild();
             }
@@ -1605,9 +1616,23 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
                     return true;
                 }
                 return false;
+<<<<<<< HEAD
             } else if (!dl.isEventOverView(this, ev)
                     && mLauncherDelegate.interceptOutsideTouch(ev, dl, this)) {
                 return true;
+=======
+            } else if (!dl.isEventOverView(this, ev)) {
+                if (mLauncher.getAccessibilityDelegate().isInAccessibleDrag()) {
+                    // Do not close the container if in drag and drop.
+                    if (!dl.isEventOverView(mLauncher.getDropTargetBar(), ev)) {
+                        return true;
+                    }
+                } else {
+                    // TODO: add ww log if need to gather tap outside to close folder
+                    close(true);
+                    return true;
+                }
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             }
         }
         return false;

@@ -31,10 +31,13 @@ import android.os.Build;
 
 import com.android.launcher3.statemanager.BaseState;
 import com.android.launcher3.statemanager.StatefulActivity;
+<<<<<<< HEAD
 import com.android.launcher3.tracing.GestureStateProto;
 import com.android.launcher3.tracing.SwipeHandlerProto;
 import com.android.quickstep.TopTaskTracker.CachedTaskInfo;
 import com.android.quickstep.util.ActiveGestureErrorDetector;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.util.ActiveGestureLog;
 import com.android.systemui.shared.recents.model.ThumbnailData;
 import com.android.systemui.shared.system.RemoteAnimationTargetCompat;
@@ -57,6 +60,7 @@ public class GestureState implements RecentsAnimationCallbacks.RecentsAnimationL
      * Defines the end targets of a gesture and the associated state.
      */
     public enum GestureEndTarget {
+<<<<<<< HEAD
         HOME(true, LAUNCHER_STATE_HOME, false, GestureStateProto.GestureEndTarget.HOME),
 
         RECENTS(true, LAUNCHER_STATE_OVERVIEW, true, GestureStateProto.GestureEndTarget.RECENTS),
@@ -66,6 +70,15 @@ public class GestureState implements RecentsAnimationCallbacks.RecentsAnimationL
 
         LAST_TASK(false, LAUNCHER_STATE_BACKGROUND, true,
                 GestureStateProto.GestureEndTarget.LAST_TASK);
+=======
+        HOME(true, LAUNCHER_STATE_HOME, false),
+
+        RECENTS(true, LAUNCHER_STATE_OVERVIEW, true),
+
+        NEW_TASK(false, LAUNCHER_STATE_BACKGROUND, true),
+
+        LAST_TASK(false, LAUNCHER_STATE_BACKGROUND, true);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
         GestureEndTarget(boolean isLauncher, int containerType, boolean recentsAttachedToAppWindow,
                 GestureStateProto.GestureEndTarget protoEndTarget) {

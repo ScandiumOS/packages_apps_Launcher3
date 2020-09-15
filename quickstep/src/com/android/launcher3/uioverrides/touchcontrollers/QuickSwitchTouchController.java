@@ -44,8 +44,13 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.states.StateAnimationConfig;
 import com.android.launcher3.touch.AbstractStateChangeTouchController;
 import com.android.launcher3.touch.SingleAxisSwipeDetector;
+<<<<<<< HEAD
 import com.android.launcher3.util.DisplayController;
 import com.android.launcher3.util.NavigationMode;
+=======
+import com.android.quickstep.SysUINavigationMode;
+import com.android.quickstep.SysUINavigationMode.Mode;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.SystemUiProxy;
 import com.android.quickstep.TaskUtils;
 import com.android.quickstep.views.RecentsView;
@@ -94,7 +99,12 @@ public class QuickSwitchTouchController extends AbstractStateChangeTouchControll
     public void onDragStart(boolean start, float startDisplacement) {
         super.onDragStart(start, startDisplacement);
         mStartContainerType = LAUNCHER_STATE_BACKGROUND;
+<<<<<<< HEAD
         TaskUtils.closeSystemWindowsAsync(CLOSE_SYSTEM_WINDOWS_REASON_RECENTS);
+=======
+        ActivityManagerWrapper.getInstance()
+                .closeSystemWindows(CLOSE_SYSTEM_WINDOWS_REASON_RECENTS);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 
     @Override

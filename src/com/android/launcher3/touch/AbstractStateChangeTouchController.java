@@ -23,6 +23,10 @@ import static com.android.launcher3.LauncherState.NORMAL;
 import static com.android.launcher3.LauncherState.OVERVIEW;
 import static com.android.launcher3.anim.AnimatorListeners.forEndCallback;
 import static com.android.launcher3.anim.Interpolators.scrollInterpolatorForVelocity;
+<<<<<<< HEAD
+=======
+import static com.android.launcher3.config.FeatureFlags.UNSTABLE_SPRINGS;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_ALLAPPS;
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_HOME;
 import static com.android.launcher3.logging.StatsLogManager.LAUNCHER_STATE_OVERVIEW;
@@ -43,6 +47,11 @@ import com.android.launcher3.anim.AnimatorPlaybackController;
 import com.android.launcher3.logger.LauncherAtom;
 import com.android.launcher3.logging.StatsLogManager;
 import com.android.launcher3.states.StateAnimationConfig;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.states.StateAnimationConfig.AnimationFlags;
+import com.android.launcher3.testing.TestProtocol;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.FlingBlockCheck;
 import com.android.launcher3.util.TouchController;
 
@@ -148,7 +157,11 @@ public abstract class AbstractStateChangeTouchController
     protected abstract LauncherState getTargetState(LauncherState fromState,
             boolean isDragTowardPositive);
 
+<<<<<<< HEAD
     protected abstract float initCurrentAnimation();
+=======
+    protected abstract float initCurrentAnimation(@AnimationFlags int animComponents);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
     private boolean reinitCurrentAnimation(boolean reachedToState, boolean isDragTowardPositive) {
         LauncherState newFromState = mFromState == null ? mLauncher.getStateManager().getState()
@@ -336,6 +349,10 @@ public abstract class AbstractStateChangeTouchController
                         Math.min(progress, 1) - endProgress) * durationMultiplier;
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         mCurrentAnimation.setEndAction(() -> onSwipeInteractionCompleted(targetState));
         ValueAnimator anim = mCurrentAnimation.getAnimationPlayer();
         anim.setFloatValues(startProgress, endProgress);
@@ -359,6 +376,7 @@ public abstract class AbstractStateChangeTouchController
     }
 
     protected void onSwipeInteractionCompleted(LauncherState targetState) {
+<<<<<<< HEAD
         onReachedFinalState(mToState);
         clearState();
         boolean shouldGoToTargetState = mGoingBetweenStates || (mToState != targetState);
@@ -366,10 +384,32 @@ public abstract class AbstractStateChangeTouchController
             goToTargetState(targetState);
         } else {
             logReachedState(mToState);
+=======
+        if (mAtomicComponentsController != null) {
+            mAtomicComponentsController.getAnimationPlayer().end();
+            mAtomicComponentsController = null;
+        }
+        clearState();
+        boolean shouldGoToTargetState = true;
+        if (mPendingAnimation != null) {
+            boolean reachedTarget = mToState == targetState;
+            mPendingAnimation.finish(reachedTarget);
+            mPendingAnimation = null;
+            shouldGoToTargetState = !reachedTarget;
+        }
+        if (shouldGoToTargetState) {
+            goToTargetState(targetState);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
     }
 
     protected void goToTargetState(LauncherState targetState) {
+<<<<<<< HEAD
+=======
+        if (targetState != mStartState) {
+            logReachedState(targetState);
+        }
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         if (!mLauncher.isInState(targetState)) {
             // If we're already in the target state, don't jump to it at the end of the animation in
             // case the user started interacting with it before the animation finished.
@@ -383,9 +423,12 @@ public abstract class AbstractStateChangeTouchController
     }
 
     private void logReachedState(LauncherState targetState) {
+<<<<<<< HEAD
         if (mStartState == targetState) {
             return;
         }
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         // Transition complete. log the action
         mLauncher.getStatsLogManager().logger()
                 .withSrcState(mStartState.statsLogOrdinal)

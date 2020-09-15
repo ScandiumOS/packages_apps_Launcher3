@@ -38,7 +38,10 @@ import com.android.launcher3.anim.PendingAnimation;
 import com.android.launcher3.touch.BaseSwipeDetector;
 import com.android.launcher3.touch.PagedOrientationHandler;
 import com.android.launcher3.touch.SingleAxisSwipeDetector;
+<<<<<<< HEAD
 import com.android.launcher3.util.DisplayController;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.FlingBlockCheck;
 import com.android.launcher3.util.TouchController;
 import com.android.launcher3.views.BaseDragLayer;
@@ -219,8 +222,15 @@ public abstract class TaskViewTouchController<T extends BaseDraggingActivity>
         }
         if (mCurrentAnimation != null) {
             mCurrentAnimation.setPlayFraction(0);
+<<<<<<< HEAD
             mCurrentAnimation.getTarget().removeListener(this);
             mCurrentAnimation.dispatchOnCancel();
+=======
+        }
+        if (mPendingAnimation != null) {
+            mPendingAnimation.finish(false);
+            mPendingAnimation = null;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
 
         PagedOrientationHandler orientationHandler = mRecentsView.getPagedOrientationHandler();
@@ -351,6 +361,10 @@ public abstract class TaskViewTouchController<T extends BaseDraggingActivity>
         float progress = mCurrentAnimation.getProgressFraction();
         float interpolatedProgress = mCurrentAnimation.getInterpolatedProgress();
         if (fling) {
+<<<<<<< HEAD
+=======
+            boolean goingUp = orientationHandler.isGoingUp(velocity, mIsRtl);
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             goingToEnd = goingUp == mCurrentAnimationIsGoingUp;
         } else {
             goingToEnd = interpolatedProgress > SUCCESS_TRANSITION_PROGRESS;
@@ -366,6 +380,7 @@ public abstract class TaskViewTouchController<T extends BaseDraggingActivity>
         animationDuration = Utilities.boundToRange(animationDuration,
                 MIN_TASK_DISMISS_ANIMATION_DURATION, MAX_TASK_DISMISS_ANIMATION_DURATION);
 
+<<<<<<< HEAD
         mCurrentAnimation.setEndAction(this::clearState);
         mCurrentAnimation.startWithVelocity(mActivity, goingToEnd,
                 velocity * orientationHandler.getSecondaryTranslationDirectionFactor(),
@@ -374,6 +389,17 @@ public abstract class TaskViewTouchController<T extends BaseDraggingActivity>
             VibratorWrapper.INSTANCE.get(mActivity).vibrate(TASK_DISMISS_VIBRATION_PRIMITIVE,
                     TASK_DISMISS_VIBRATION_PRIMITIVE_SCALE, TASK_DISMISS_VIBRATION_FALLBACK);
             mIsDismissHapticRunning = true;
+=======
+        mCurrentAnimation.setEndAction(() -> onCurrentAnimationEnd(goingToEnd));
+        mCurrentAnimation.startWithVelocity(mActivity, goingToEnd,
+                velocity, mEndDisplacement, animationDuration);
+    }
+
+    private void onCurrentAnimationEnd(boolean wasSuccess) {
+        if (mPendingAnimation != null) {
+            mPendingAnimation.finish(wasSuccess);
+            mPendingAnimation = null;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         }
     }
 
@@ -382,6 +408,13 @@ public abstract class TaskViewTouchController<T extends BaseDraggingActivity>
         mDetector.setDetectableScrollConditions(0, false);
         mTaskBeingDragged = null;
         mCurrentAnimation = null;
+<<<<<<< HEAD
         mIsDismissHapticRunning = false;
+=======
+        if (mPendingAnimation != null) {
+            mPendingAnimation.finish(false);
+            mPendingAnimation = null;
+        }
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     }
 }

@@ -71,6 +71,7 @@ public class RecentsOrientedState implements
 
     private static final String TAG = "RecentsOrientedState";
     private static final boolean DEBUG = false;
+    private static final String DELIMITER_DOT = "\\.";
 
     @Retention(SOURCE)
     @IntDef({ROTATION_0, ROTATION_90, ROTATION_180, ROTATION_270})
@@ -585,5 +586,14 @@ public class RecentsOrientedState implements
 
     private static String nameAndAddress(Object obj) {
         return obj.getClass().getSimpleName() + "@" + obj.hashCode();
+    }
+
+    /**
+     * String conversion for only the helpful parts of {@link Object#toString()} method
+     * @param stringToExtract "foo.bar.baz.MyObject@1234"
+     * @return "MyObject@1234"
+     */
+    private static String extractObjectNameAndAddress(String stringToExtract) {
+        return stringToExtract.substring(stringToExtract.lastIndexOf(DELIMITER_DOT));
     }
 }

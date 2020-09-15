@@ -39,8 +39,11 @@ import android.widget.Toast;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.dragndrop.DragOptions;
 import com.android.launcher3.logging.FileLog;
+<<<<<<< HEAD
 import com.android.launcher3.logging.InstanceId;
 import com.android.launcher3.logging.InstanceIdSequence;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.logging.StatsLogManager;
 import com.android.launcher3.logging.StatsLogManager.StatsLogger;
 import com.android.launcher3.model.data.ItemInfo;
@@ -136,6 +139,7 @@ public class SecondaryDropTarget extends ButtonDropTarget implements OnAlarmList
     }
 
     @Override
+<<<<<<< HEAD
     protected void setupItemInfo(ItemInfo info) {
         int buttonType = getButtonType(info, getViewUnderDrag(info));
         if (buttonType != INVALID) {
@@ -144,6 +148,8 @@ public class SecondaryDropTarget extends ButtonDropTarget implements OnAlarmList
     }
 
     @Override
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     protected boolean supportsDrop(ItemInfo info) {
         return getButtonType(info, getViewUnderDrag(info)) != INVALID;
     }

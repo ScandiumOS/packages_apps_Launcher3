@@ -33,8 +33,11 @@ import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.statemanager.StateManager;
 import com.android.launcher3.taskbar.FallbackTaskbarUIController;
 import com.android.launcher3.touch.PagedOrientationHandler;
+<<<<<<< HEAD
 import com.android.launcher3.util.DisplayController;
 import com.android.quickstep.GestureState.GestureEndTarget;
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.fallback.RecentsState;
 import com.android.quickstep.util.ActivityInitListener;
 import com.android.quickstep.util.AnimatorControllerWithResistance;
@@ -163,6 +166,7 @@ public final class FallbackActivityInterface extends
             return;
         }
 
+<<<<<<< HEAD
         stateManager.addStateListener(
                 new StateManager.StateListener<RecentsState>() {
                     @Override
@@ -177,6 +181,8 @@ public final class FallbackActivityInterface extends
                 });
     }
 
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
     @Override
     public boolean isInLiveTileMode() {
         RecentsActivity activity = getCreatedActivity();

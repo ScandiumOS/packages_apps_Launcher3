@@ -230,6 +230,15 @@ public class AssistantInputConsumer extends DelegateInputConsumer {
             if (mDistance >= mDragDistThreshold && mTimeFraction >= 1) {
                 SystemUiProxy.INSTANCE.get(mContext).onAssistantGestureCompletion(0);
                 startAssistantInternal();
+<<<<<<< HEAD
+=======
+
+                Bundle args = new Bundle();
+                args.putInt(OPA_BUNDLE_TRIGGER, OPA_BUNDLE_TRIGGER_DIAG_SWIPE_GESTURE);
+                args.putInt(INVOCATION_TYPE_KEY, INVOCATION_TYPE_GESTURE);
+                SystemUiProxy.INSTANCE.get(mContext).startAssistant(args);
+                mLaunchedAssistant = true;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             } else {
                 SystemUiProxy.INSTANCE.get(mContext).onAssistantProgress(mLastProgress);
             }
@@ -274,6 +283,14 @@ public class AssistantInputConsumer extends DelegateInputConsumer {
                 SystemUiProxy.INSTANCE.get(mContext).onAssistantGestureCompletion(
                     (float) Math.sqrt(velocityX * velocityX + velocityY * velocityY));
                 startAssistantInternal();
+<<<<<<< HEAD
+=======
+
+                Bundle args = new Bundle();
+                args.putInt(INVOCATION_TYPE_KEY, INVOCATION_TYPE_GESTURE);
+                SystemUiProxy.INSTANCE.get(mContext).startAssistant(args);
+                mLaunchedAssistant = true;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
             }
             return true;
         }

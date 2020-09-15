@@ -95,11 +95,16 @@ import com.android.launcher3.anim.AnimationSuccessListener;
 import com.android.launcher3.anim.AnimatorPlaybackController;
 import com.android.launcher3.logging.StatsLogManager;
 import com.android.launcher3.logging.StatsLogManager.StatsLogger;
+<<<<<<< HEAD
 import com.android.launcher3.statemanager.BaseState;
 import com.android.launcher3.statemanager.StatefulActivity;
 import com.android.launcher3.tracing.InputConsumerProto;
 import com.android.launcher3.tracing.SwipeHandlerProto;
 import com.android.launcher3.util.ActivityLifecycleCallbacksAdapter;
+=======
+import com.android.launcher3.statemanager.StatefulActivity;
+import com.android.launcher3.testing.TestProtocol;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.util.TraceHelper;
 import com.android.launcher3.util.WindowBounds;
 import com.android.quickstep.BaseActivityInterface.AnimationFactory;
@@ -1260,10 +1265,22 @@ public abstract class AbsSwipeUpHandler<T extends StatefulActivity<S>,
             logger.withItemInfo(targetTask.getItemInfo());
         }
 
+<<<<<<< HEAD
         int pageIndex = endTarget == LAST_TASK || mRecentsView == null
                 ? LOG_NO_OP_PAGE_INDEX
                 : mRecentsView.getNextPage();
         logger.withRank(pageIndex);
+=======
+        DeviceProfile dp = mDp;
+        if (dp == null || mDownPos == null) {
+            // We probably never received an animation controller, skip logging.
+            return;
+        }
+        int pageIndex = endTarget == LAST_TASK
+                ? LOG_NO_OP_PAGE_INDEX
+                : mRecentsView.getNextPage();
+        // TODO: set correct container using the pageIndex
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         logger.log(event);
     }
 

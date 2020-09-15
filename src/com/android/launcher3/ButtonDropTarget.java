@@ -40,6 +40,11 @@ import com.android.launcher3.dragndrop.DragLayer;
 import com.android.launcher3.dragndrop.DragOptions;
 import com.android.launcher3.dragndrop.DragView;
 import com.android.launcher3.model.data.ItemInfo;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.util.Themes;
+import com.android.launcher3.util.Thunk;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 /**
  * Implements a DropTarget.
@@ -401,6 +406,7 @@ public abstract class ButtonDropTarget extends TextView
                 && TextUtils.equals(mText.subSequence(firstLine.length(), secondLine.length()),
                 secondLine));
     }
+<<<<<<< HEAD
 
     /**
      * Reduce the size of the text until it fits the measured width or reaches a minimum.
@@ -433,4 +439,6 @@ public abstract class ButtonDropTarget extends TextView
         }
         return minSize;
     }
+=======
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 }

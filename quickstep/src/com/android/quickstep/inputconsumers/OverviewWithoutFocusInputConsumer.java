@@ -28,7 +28,11 @@ import com.android.launcher3.BaseActivity;
 import com.android.launcher3.BaseDraggingActivity;
 import com.android.launcher3.logger.LauncherAtom;
 import com.android.launcher3.testing.TestLogging;
+<<<<<<< HEAD
 import com.android.launcher3.testing.shared.TestProtocol;
+=======
+import com.android.launcher3.testing.TestProtocol;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.quickstep.GestureState;
 import com.android.quickstep.InputConsumer;
 import com.android.quickstep.RecentsAnimationDeviceState;

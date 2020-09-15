@@ -40,8 +40,12 @@ import android.view.animation.Interpolator;
 import com.android.launcher3.AbstractFloatingView;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherState;
+<<<<<<< HEAD
 import com.android.launcher3.anim.Interpolators;
 import com.android.launcher3.states.StateAnimationConfig;
+=======
+import com.android.launcher3.states.StateAnimationConfig.AnimationFlags;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 
 /**
  * TouchController to switch between NORMAL and ALL_APPS state.
@@ -165,7 +169,11 @@ public class AllAppsSwipeController extends AbstractStateChangeTouchController {
     }
 
     @Override
+<<<<<<< HEAD
     protected float initCurrentAnimation() {
+=======
+    protected float initCurrentAnimation(@AnimationFlags int animComponents) {
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
         float range = getShiftRange();
         StateAnimationConfig config = getConfigForStates(mFromState, mToState);
         config.duration = (long) (2 * range);

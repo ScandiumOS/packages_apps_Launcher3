@@ -43,6 +43,12 @@ import com.android.launcher3.anim.AnimatorPlaybackController;
 import com.android.launcher3.anim.PendingAnimation;
 import com.android.launcher3.compat.AccessibilityManagerCompat;
 import com.android.launcher3.config.FeatureFlags;
+<<<<<<< HEAD
+=======
+import com.android.launcher3.graphics.OverviewScrim;
+import com.android.launcher3.states.StateAnimationConfig;
+import com.android.launcher3.testing.TestProtocol;
+>>>>>>> 95786e077d (Good riddance UserEventDispatcher)
 import com.android.launcher3.touch.SingleAxisSwipeDetector;
 import com.android.launcher3.util.TouchController;
 import com.android.quickstep.TaskUtils;
