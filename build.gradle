@@ -82,10 +82,14 @@ android {
             manifest.srcFile 'AndroidManifest-common.xml'
             proto {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 srcDirs = ['protos/', 'protos_overrides/']
 =======
                 srcDir 'protos/'
 >>>>>>> 95786e077d (Good riddance UserEventDispatcher)
+=======
+                srcDirs = ['protos/', 'protos_overrides/']
+>>>>>>> cbeb13d6c7 ([AA+] Log app launches from AA+ search result container.)
             }
         }
 

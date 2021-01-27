@@ -22,9 +22,13 @@ option java_outer_classname = "LauncherAtomExtensions";
 // Wrapper message for containers used at the quickstep level.
 // Message name should match with launcher_atom_extension.proto message at
 // the AOSP level.
+<<<<<<< HEAD
 // Next ID = 3
 message ExtendedContainers {
   reserved 2; // Deleted fields
+=======
+message ExtendedContainers {
+>>>>>>> cbeb13d6c7 ([AA+] Log app launches from AA+ search result container.)
 
   oneof Container{
     DeviceSearchResultContainer device_search_result_container = 1;
@@ -32,6 +36,7 @@ message ExtendedContainers {
 }
 
 // Represents on-device search result container.
+<<<<<<< HEAD
 // Next ID = 4
 message DeviceSearchResultContainer{
   optional int32 query_length = 1;
@@ -63,4 +68,7 @@ message DeviceSearchResultContainer{
       QSB = 2;
     }
   }
+=======
+message DeviceSearchResultContainer{
+>>>>>>> cbeb13d6c7 ([AA+] Log app launches from AA+ search result container.)
 }
