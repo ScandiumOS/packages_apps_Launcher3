@@ -33,12 +33,9 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     LauncherPluginLib \
-<<<<<<< HEAD
-    launcher_log_protos_lite
-=======
+    launcher_log_protos_lite \
     launcher_quickstep_log_protos_lite \
     search_ui
->>>>>>> cbeb13d6c7 ([AA+] Log app launches from AA+ search result container.)
 
 LOCAL_SRC_FILES := \
     $(call all-java-files-under, src_build_config) \
