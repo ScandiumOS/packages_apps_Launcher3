@@ -68,11 +68,8 @@ message ContainerInfo {
     SettingsContainer settings_container = 9;
     PredictedHotseatContainer predicted_hotseat_container = 10;
     TaskSwitcherContainer task_switcher_container = 11;
-<<<<<<< HEAD
     TaskBarContainer task_bar_container = 12;
     WallpapersContainer wallpapers_container = 13;
-=======
->>>>>>> cbeb13d6c7 ([AA+] Log app launches from AA+ search result container.)
     ExtendedContainers extended_containers = 20;
   }
 }

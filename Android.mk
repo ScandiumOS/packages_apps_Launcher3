@@ -33,12 +33,9 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     LauncherPluginLib \
-<<<<<<< HEAD
-    launcher_log_protos_lite
-=======
+    launcher_log_protos_lite \
     launcher_quickstep_log_protos_lite \
     search_ui
->>>>>>> cbeb13d6c7 ([AA+] Log app launches from AA+ search result container.)
 
 LOCAL_SRC_FILES := \
     $(call all-java-files-under, src_build_config) \
@@ -142,7 +139,7 @@ else
 endif
 LOCAL_MODULE := Launcher3QuickStepLib
 LOCAL_PRIVILEGED_MODULE := true
-LOCAL_STATIC_ANDROID_LIBRARIES := Launcher3CommonDepsLib
+#LOCAL_STATIC_ANDROID_LIBRARIES := Launcher3CommonDepsLib
 
 LOCAL_SRC_FILES := \
     $(call all-java-files-under, src) \
@@ -163,7 +160,7 @@ include $(CLEAR_VARS)
 LOCAL_USE_AAPT2 := true
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_STATIC_ANDROID_LIBRARIES := Launcher3QuickStepLib
+#LOCAL_STATIC_ANDROID_LIBRARIES := Launcher3QuickStepLib
 LOCAL_PROGUARD_ENABLED := disabled
 
 ifneq (,$(wildcard frameworks/base))
@@ -206,7 +203,7 @@ else
   LOCAL_SDK_VERSION := system_current
   LOCAL_MIN_SDK_VERSION := 26
 endif
-LOCAL_STATIC_ANDROID_LIBRARIES := Launcher3CommonDepsLib
+#LOCAL_STATIC_ANDROID_LIBRARIES := Launcher3CommonDepsLib
 
 LOCAL_SRC_FILES := \
     $(call all-java-files-under, src) \
